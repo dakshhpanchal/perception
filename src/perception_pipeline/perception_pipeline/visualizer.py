@@ -14,8 +14,7 @@ class PerceptionVisualizer(Node):
         # Parameters
         self.declare_parameter('costmap_topic', '/costmap')
         self.declare_parameter('filtered_points_topic', '/filtered_points')
-        
-        # Get parameters
+
         costmap_topic = self.get_parameter('costmap_topic').value
         filtered_points_topic = self.get_parameter('filtered_points_topic').value
         
