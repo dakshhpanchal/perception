@@ -1,6 +1,16 @@
 <?xml version="1.0"?>
 <launch>
-    <!-- RealSense Camera Node -->
+
+    <node
+        pkg="rplidar_ros"
+        exec="rplidar_node"
+        name="rplidar_node"
+        output="screen">
+        <param name="serial_port" value="/dev/ttyUSB0"/>
+        <param name="serial_baudrate" value="256000"/>
+        <param name="frame_id" value="laser"/>
+    </node>
+
     <node
         pkg="realsense2_camera"
         exec="realsense2_camera_node"
@@ -18,7 +28,6 @@
         <param name="tf_publish_rate" value="0.0" />
     </node>
 
-    <!-- White Pixel Filter Node -->
     <node
         pkg="perception_pipeline"
         exec="white_filter"
@@ -36,7 +45,6 @@
         <param name="max_distance" value="3.0" />
     </node>
 
-    <!-- Costmap Generator Node -->
     <node
         pkg="perception_pipeline"
         exec="costmap_generator"
@@ -50,7 +58,6 @@
         <param name="inflation_radius" value="0.3" />
     </node>
 
-    <!-- Visualizer Node -->
     <node
         pkg="perception_pipeline"
         exec="visualizer"
@@ -60,7 +67,6 @@
         <param name="filtered_points_topic" value="/filtered_points" />
     </node>
 
-    <!-- TF Static Transforms -->
     <node
         pkg="tf2_ros"
         exec="static_transform_publisher"
@@ -73,11 +79,10 @@
         name="map_tf"
         args="0 0 0 0 0 0 map base_link" />
 
-    <!-- RViz for visualization -->
     <node
         pkg="rviz2"
         exec="rviz2"
         name="rviz"
-        args="-d $(find-pkg-share perception_pipeline)/config/perception.rviz"
+        args="-d $(find-pkg-share perception_pipeline)/rviz/config.rviz"
         output="screen" />
 </launch>
