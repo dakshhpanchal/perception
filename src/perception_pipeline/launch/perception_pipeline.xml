@@ -80,6 +80,11 @@
         args="0 0 0 0 0 0 map base_link" />
 
     <node
+        pkg="tf2_ros"
+        exec="static_transform_publisher"
+        name="laser_tf"
+        args="0 0 0 0 0 0 base_link laser" />
+    <node
         pkg="rviz2"
         exec="rviz2"
         name="rviz"
